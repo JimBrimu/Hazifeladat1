@@ -35,16 +35,14 @@ import org.xml.sax.SAXException;
  */
 public class FXMLController implements Initializable {
     private String fileNameXML;
-   
+    Map<String, Double> currencies = new HashMap<String, Double>();
     
     @FXML
     private TextField filenameXML;
-    
     @FXML
     private ComboBox<String> comboBox1;
     @FXML
     private Button btnAtvaltas;
-    
     @FXML
     private AnchorPane anchorpane;
     @FXML
@@ -52,7 +50,6 @@ public class FXMLController implements Initializable {
     @FXML
     private TextField osszegFt;
 
-    Map<String, Double> currencies = new HashMap<String, Double>();
     /**
      * Initializes the controller class.
      */
@@ -73,8 +70,6 @@ public class FXMLController implements Initializable {
         filenameXML.setText(fileNameXML);
         
         if (file != null) {
-            
-
 
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
@@ -116,7 +111,6 @@ public class FXMLController implements Initializable {
 
         
         }
-//        System.out.println(file.getPath());
         
     }
 
