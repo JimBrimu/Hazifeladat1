@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author plosz
+ * @author jimbrimu
  */
 public class FXMain extends Application {
 
@@ -25,7 +25,7 @@ public class FXMain extends Application {
         
         Scene scene = new Scene(root);
         
-        primaryStage.setTitle("Valuta váltó program 1");
+        primaryStage.setTitle("Valuta váltó program 1.0");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
