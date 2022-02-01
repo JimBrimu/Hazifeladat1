@@ -58,7 +58,7 @@ public class FXMLController implements Initializable {
         comboBox1.setPromptText("Válassz!");
         // TODO
     }    
-
+ 
     @FXML
     private void actionXMLloader(ActionEvent event) {
         FileChooser filechooser = new FileChooser();
