@@ -29,37 +29,6 @@ public class FXMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-/*    
-    public java.util.Map<String, Double> xmlBeolvas(String filename1) {
-        java.util.Map<String, Double> currencies = new HashMap<>();
-
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
-        try {
-            dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(new File(filename1));
-            doc.getDocumentElement().normalize();
-
-            NodeList nodeList = doc.getElementsByTagName("Cube");
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Element elem = (Element) nodeList.item(i);
-                if (elem.getAttribute("currency") != null && !elem.getAttribute("currency").isEmpty()) {
-                    currencies.put(elem.getAttribute("currency"), Double.valueOf(elem.getAttribute("rate")));
-                    
-//                    if ("HUF".equalsIgnoreCase(elem.getAttribute("currency"))) {
-//                        forintArfolyam = Float.valueOf(elem.getAttribute("rate"));
-//                    }
-                }
-            }
-        } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
-        }
-
-        return currencies;
-    }
-  */  
     
     /**
      * @param args the command line arguments
