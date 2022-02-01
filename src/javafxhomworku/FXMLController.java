@@ -77,6 +77,7 @@ public class FXMLController implements Initializable {
             dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(new File(fileNameXML));
+//            Document doc = db.parse(new URL("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml").openStream());
             doc.getDocumentElement().normalize();
 
             NodeList nodeList = doc.getElementsByTagName("Cube");
