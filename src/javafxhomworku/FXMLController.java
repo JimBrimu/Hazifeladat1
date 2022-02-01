@@ -31,18 +31,17 @@ import org.xml.sax.SAXException;
 /**
  * FXML Controller class
  *
- * @author plosz
+ * @author jimbrimu
  */
 public class FXMLController implements Initializable {
     private String fileNameXML;
- 
-    
+   
     
     @FXML
     private TextField filenameXML;
     
     @FXML
-    private ComboBox<?> comboBox1;
+    private ComboBox<String> comboBox1;
     @FXML
     private Button btnAtvaltas;
     
@@ -73,8 +72,7 @@ public class FXMLController implements Initializable {
         
         if (file != null) {
             
-            
-        Map<String, Double> currencies = new HashMap<>();
+        Map<String, Double> currencies = new HashMap<String, Double>();
 
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
@@ -90,12 +88,12 @@ public class FXMLController implements Initializable {
                 if (elem.getAttribute("currency") != null && !elem.getAttribute("currency").isEmpty()) {
                     currencies.put(elem.getAttribute("currency"), Double.valueOf(elem.getAttribute("rate")));
 
-                    
 //                    if ("HUF".equalsIgnoreCase(elem.getAttribute("currency"))) {
 //                        forintArfolyam = Float.valueOf(elem.getAttribute("rate"));
 //                    }
                 }
             }
+            comboBox1.getItems().addAll(currencies.keySet());
 //            comboBox1 = FXCollections.observableMap(currencies.values());
             
         } catch (ParserConfigurationException | SAXException | IOException e) {
@@ -125,5 +123,38 @@ public class FXMLController implements Initializable {
     @FXML
     private void actionAtvaltas(ActionEvent event) {
     }
+
+    
+    public java.util.Map<String, Double> xmlBeolvas(String filename1) {
+
+        java.util.Map<String, Double> currencies = new HashMap<String, Double>();
+
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+        try {
+            dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = db.parse(new File(filename1));
+            doc.getDocumentElement().normalize();
+
+            NodeList nodeList = doc.getElementsByTagName("Cube");
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Element elem = (Element) nodeList.item(i);
+                if (elem.getAttribute("currency") != null && !elem.getAttribute("currency").isEmpty()) {
+                    currencies.put(elem.getAttribute("currency"), Double.valueOf(elem.getAttribute("rate")));
+                    
+//                    if ("HUF".equalsIgnoreCase(elem.getAttribute("currency"))) {
+//                        forintArfolyam = Float.valueOf(elem.getAttribute("rate"));
+//                    }
+                }
+            }
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return currencies;
+    }
+  
+
     
 }
