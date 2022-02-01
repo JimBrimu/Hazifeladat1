@@ -90,9 +90,6 @@ public class FXMLController implements Initializable {
                 if (elem.getAttribute("currency") != null && !elem.getAttribute("currency").isEmpty()) {
                     currencies.put(elem.getAttribute("currency"), Double.valueOf(elem.getAttribute("rate")));
 
-//                    if ("HUF".equalsIgnoreCase(elem.getAttribute("currency"))) {
-//                        forintArfolyam = Float.valueOf(elem.getAttribute("rate"));
-//                    }
                 }
             }
             comboBox1.getItems().addAll(currencies.keySet());
