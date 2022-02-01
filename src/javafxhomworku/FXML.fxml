@@ -10,14 +10,14 @@
 <AnchorPane id="AnchorPane" fx:id="anchorpane" prefHeight="367.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxhomworku.FXMLController">
    <children>
       <Button id="btnAllomany" layoutX="643.0" layoutY="96.0" mnemonicParsing="false" onAction="#actionXMLloader" text="XML betöltés" />
-      <TextField id="filenameXML" fx:id="filenameXML" alignment="CENTER_RIGHT" editable="false" layoutX="153.0" layoutY="96.0" prefHeight="35.0" prefWidth="483.0" />
+      <TextField id="filenameXML" fx:id="filenameXML" alignment="CENTER_RIGHT" editable="false" layoutX="180.0" layoutY="96.0" prefHeight="35.0" prefWidth="456.0" />
       <Label alignment="CENTER" layoutX="322.0" layoutY="25.0" prefHeight="52.0" prefWidth="321.0" text="Valuta váltó">
          <font>
             <Font name="Consolas Bold" size="35.0" />
          </font>
       </Label>
-      <TextField id="mennyiFt" fx:id="mennyiFt" alignment="CENTER_RIGHT" disable="true" layoutX="184.0" layoutY="209.0" prefHeight="35.0" prefWidth="254.0" promptText="Mennyit akar váltani?" />
-      <ComboBox id="comboBox1" fx:id="comboBox1" disable="true" layoutX="22.0" layoutY="210.0" onAction="#actionCombobox1" prefHeight="35.0" prefWidth="139.0" promptText="Devizanem" />
+      <TextField id="mennyiFt" fx:id="mennyiFt" alignment="CENTER_RIGHT" disable="true" layoutX="183.0" layoutY="209.0" prefHeight="35.0" prefWidth="254.0" promptText="Mennyit akar váltani?" />
+      <ComboBox id="comboBox1" fx:id="comboBox1" disable="true" layoutX="67.0" layoutY="210.0" onAction="#actionCombobox1" prefHeight="35.0" prefWidth="89.0" promptText="Devizanem" />
       <Label alignment="CENTER" layoutX="552.0" layoutY="201.0" prefHeight="52.0" prefWidth="33.0" text="=">
          <font>
             <Font name="Consolas Bold" size="35.0" />

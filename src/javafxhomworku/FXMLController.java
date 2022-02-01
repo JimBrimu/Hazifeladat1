@@ -52,11 +52,13 @@ public class FXMLController implements Initializable {
     @FXML
     private TextField osszegFt;
 
+    Map<String, Double> currencies = new HashMap<String, Double>();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        comboBox1.setPromptText("Válassz!");
         // TODO
     }    
 
@@ -72,7 +74,7 @@ public class FXMLController implements Initializable {
         
         if (file != null) {
             
-        Map<String, Double> currencies = new HashMap<String, Double>();
+
 
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
@@ -94,25 +96,30 @@ public class FXMLController implements Initializable {
                 }
             }
             comboBox1.getItems().addAll(currencies.keySet());
+            comboBox1.getSelectionModel().select(0);
 //            comboBox1 = FXCollections.observableMap(currencies.values());
             
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
 
+        if (!currencies.isEmpty()) {
+            comboBox1.setVisibleRowCount(8);
+            comboBox1.setDisable(false);
+            btnAtvaltas.setDisable(false);
+            mennyiFt.setDisable(false);
+            osszegFt.setDisable(false);
+        }
+            else {
+            comboBox1.setDisable(true);
+            btnAtvaltas.setDisable(true);
+            mennyiFt.setDisable(true);
+            osszegFt.setDisable(true);
+        }
 
-            
-            
-            
-            
-        comboBox1.setDisable(false);
-        btnAtvaltas.setDisable(false);
-        mennyiFt.setDisable(false);
-        osszegFt.setDisable(false);
-                
+        
         }
 //        System.out.println(file.getPath());
-        
         
     }
 
@@ -122,39 +129,13 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void actionAtvaltas(ActionEvent event) {
-    }
-
     
-    public java.util.Map<String, Double> xmlBeolvas(String filename1) {
+        Double ennyiFt;
+        
+        ennyiFt = (Double.valueOf(mennyiFt.getText()) / currencies.get(comboBox1.getSelectionModel().getSelectedItem()).doubleValue() ) * currencies.get("HUF");
+        osszegFt.setText(ennyiFt.toString());
 
-        java.util.Map<String, Double> currencies = new HashMap<String, Double>();
-
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
-        try {
-            dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(new File(filename1));
-            doc.getDocumentElement().normalize();
-
-            NodeList nodeList = doc.getElementsByTagName("Cube");
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Element elem = (Element) nodeList.item(i);
-                if (elem.getAttribute("currency") != null && !elem.getAttribute("currency").isEmpty()) {
-                    currencies.put(elem.getAttribute("currency"), Double.valueOf(elem.getAttribute("rate")));
-                    
-//                    if ("HUF".equalsIgnoreCase(elem.getAttribute("currency"))) {
-//                        forintArfolyam = Float.valueOf(elem.getAttribute("rate"));
-//                    }
-                }
-            }
-        } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
-        }
-
-        return currencies;
     }
-  
 
     
 }
