@@ -7,6 +7,7 @@ package javafxhomworku;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -15,7 +16,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -35,6 +38,7 @@ import org.xml.sax.SAXException;
  */
 public class FXMLController implements Initializable {
     private String fileNameXML;
+    
     Map<String, Double> currencies = new HashMap<String, Double>();
     
     @FXML
@@ -49,6 +53,14 @@ public class FXMLController implements Initializable {
     private TextField mennyiFt;
     @FXML
     private TextField osszegFt;
+    @FXML
+    private RadioButton rButton1;
+    @FXML
+    private ToggleGroup group1;
+    @FXML
+    private TextField urlAddress;
+    @FXML
+    private RadioButton rButton2;
 
     /**
      * Initializes the controller class.
@@ -56,28 +68,30 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         comboBox1.setPromptText("Válassz!");
-        // TODO
+        urlAddress.setText("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml");
     }    
  
     @FXML
     private void actionXMLloader(ActionEvent event) {
-        FileChooser filechooser = new FileChooser();
-        filechooser.setTitle("Válassza ki a valuta árfolyamokat tartalmazó XML-t!");
-        Stage stage = (Stage) anchorpane.getScene().getWindow();
-        File file = filechooser.showOpenDialog(stage);
-        
-        fileNameXML = file.getPath();
-        filenameXML.setText(fileNameXML);
-        
-        if (file != null) {
-
+        currencies.clear();
+        comboBox1.getItems().clear();
+        if (rButton1.isSelected()) {
+            FileChooser filechooser = new FileChooser();
+            filechooser.setTitle("Válassza ki a valuta árfolyamokat tartalmazó XML-t!");
+            Stage stage = (Stage) anchorpane.getScene().getWindow();
+            File file = filechooser.showOpenDialog(stage);
+            fileNameXML = file.getPath();
+            filenameXML.setText(fileNameXML);
+        }    
+ 
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
         try {
             dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(new File(fileNameXML));
-//            Document doc = db.parse(new URL("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml").openStream());
+           
+            Document doc = rButton1.isSelected() ? db.parse(new File(fileNameXML)) : db.parse(new URL(urlAddress.getText()).openStream());
+
             doc.getDocumentElement().normalize();
 
             NodeList nodeList = doc.getElementsByTagName("Cube");
@@ -111,7 +125,6 @@ public class FXMLController implements Initializable {
         }
 
         
-        }
         
     }
 
@@ -128,6 +141,6 @@ public class FXMLController implements Initializable {
         osszegFt.setText(ennyiFt.toString());
 
     }
-
+  
     
 }
