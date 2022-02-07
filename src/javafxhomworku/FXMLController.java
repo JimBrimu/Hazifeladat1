@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
+
 package javafxhomworku;
 
 import java.io.File;
@@ -105,11 +102,14 @@ public class FXMLController implements Initializable {
             comboBox1.getSelectionModel().select(0);
 //            comboBox1 = FXCollections.observableMap(currencies.values());
             
+//        } catch (ParserConfigurationException | SAXException | IOException e) {
+//            e.printStackTrace();
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
+            java.util.logging.Logger.getLogger(FXMLController.class.getName()).log(java.util.logging.Level.SEVERE, null, e);
         }
 
         if (!currencies.isEmpty()) {
+            System.out.println("Hiba történt a betöltéskor! Próbálja újra.");
             comboBox1.setVisibleRowCount(8);
             comboBox1.setDisable(false);
             btnAtvaltas.setDisable(false);
