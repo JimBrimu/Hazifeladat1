@@ -109,7 +109,6 @@ public class FXMLController implements Initializable {
         }
 
         if (!currencies.isEmpty()) {
-            System.out.println("Hiba történt a betöltéskor! Próbálja újra.");
             comboBox1.setVisibleRowCount(8);
             comboBox1.setDisable(false);
             btnAtvaltas.setDisable(false);
@@ -117,6 +116,7 @@ public class FXMLController implements Initializable {
             osszegFt.setDisable(false);
         }
             else {
+            System.out.println("Hiba történt a betöltéskor! Próbálja újra.");
             comboBox1.setDisable(true);
             btnAtvaltas.setDisable(true);
             mennyiFt.setDisable(true);
